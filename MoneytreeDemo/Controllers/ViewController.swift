@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     let digitalMoneyTitleLabel = UILabel()
     let totalBalanceLable = UILabel()
     
-    var accountsTableView = CustomTableViewController()
+    var accountsTableView = SimpleTableViewController()
     
     let addDigitalMoneyButton = UIView() //will be a button
     
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.title = "Balances"
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        print("View Controller data: \(accountData.usersAccounts.count)")
+        
         
         let button = UIButton(type: UIButton.ButtonType.custom)
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
@@ -93,9 +93,8 @@ class ViewController: UIViewController {
         
         let balanceContainer = UIView()
         let balanceLabel = UILabel()
-//        balanceLabel.text = accountData.getTotalBalance()
-//        balanceLabel.accessibilityLabel = accountData.getTotalBalance()
-        balanceLabel.text = "$1,000,000"
+        balanceLabel.text = accountData.getTotalBalance()
+        balanceLabel.accessibilityLabel = accountData.getTotalBalance()
         balanceLabel.textAlignment = .left
         balanceLabel.textColor = .white
         balanceLabel.adjustsFontForContentSizeCategory = true
@@ -114,6 +113,7 @@ class ViewController: UIViewController {
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
         
         tableViewContainer.addSubview(accountsTableView.tableView)
         accountsTableView.tableView.snp.makeConstraints { (make) in

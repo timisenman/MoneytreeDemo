@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CustomTableViewController: UITableViewController {
+class SimpleTableViewController: UITableViewController {
     
-    var userAccounts: UserAccounts?
+    let userAccount = FakeDataManager()
 
     let cellId = "cell"
     
@@ -21,11 +21,6 @@ class CustomTableViewController: UITableViewController {
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellId)
         self.tableView.backgroundColor = .clear
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source

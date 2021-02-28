@@ -11,47 +11,55 @@ import Foundation
 class FakeDataManager: NSObject {
     static let shared = FakeDataManager()
     
-    public var usersAccounts: [UserAccounts] = [UserAccounts]()
+    public var usersAccounts: UserAccounts?
     
     enum CurrencyCode: String { case JPY, USD }
     
     override init() {
         super.init()
-        getData()
+        getDataFromBundle()
     }
     
-    func getData() {
-        let accountData = Bundle.main.decode(AllAccounts.self, from: "accounts.json", keyDecodingStrategy: .convertFromSnakeCase)
+}
+
+extension FakeDataManager {
+    func getDataFromBundle() {
+        let accountData = Bundle.main.decode(AllAccounts.self,
+                                             from: "accounts.json",
+                                             keyDecodingStrategy: .convertFromSnakeCase)
         
-//        accountData.accounts?.forEach({ (account) in
-//            if let accountId = account.id {
-//                let transactionList = Bundle.main.decode(TransactionList.self, from: "transactions_\(accountId).json", keyDecodingStrategy: .convertFromSnakeCase)
-//                
-//                usersAccounts.append(UserAccounts(accountInfo: account, transactionHistory: transactionList))
-//            } else {
-//                fatalError("File does not exist for Account ID: \(String(describing: account.id))")
-//            }
-//        })
+        var tempTransactionsPerAccount: [TransactionsPerAccount] = [TransactionsPerAccount]()
         
-        print("All users accounted for: \(usersAccounts.count)")
+        accountData.accounts?.forEach({ (account) in
+            if let accountId = account.id {
+                let transactionsPerAccount = Bundle.main.decode(TransactionsPerAccount.self,
+                                                                from: "transactions_\(accountId).json",
+                                                                keyDecodingStrategy: .convertFromSnakeCase)
+                
+                tempTransactionsPerAccount.append(transactionsPerAccount)
+            } else {
+                fatalError("File does not exist for Account ID: \(String(describing: account.id))")
+            }
+        })
+        
+        usersAccounts = UserAccounts(accountsList: accountData, transactionsPerAccount: tempTransactionsPerAccount)
     }
     
-//    func getTotalBalance(with currency: String = "JPY") -> String {
-//        guard !usersAccounts.isEmpty else { fatalError("No users in record") }
-//
-//        var balance: Double = 0.0
-//
-//        usersAccounts.forEach { (account) in
-//            print(account.accountInfo?.id, account.accountInfo?.currentBalance)
-//            if let currentBalance = account.accountInfo?.currentBalance {
-//                print("\(account.accountInfo?.institution ?? "No Name"): \(currentBalance)")
-//                balance += currentBalance
-//            }
-//        }
-//        let currencyFormatter = CurrencyFormatter()
-//        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, and: balance)
-//        return balanceString
-//    }
+    func getTotalBalance(with currency: String = "JPY") -> String {
+        guard (usersAccounts?.accountsList?.accounts?.isEmpty != nil) else { fatalError("No users in record") }
+        
+        var balance: Double = 0.0
+        
+        usersAccounts?.accountsList?.accounts?.forEach { (account) in
+            if let currentBalance = account.currentBalance {
+                print("\(account.institution ?? "No Name"): \(currentBalance)")
+                balance += currentBalance
+            }
+        }
+        let currencyFormatter = CurrencyFormatter()
+        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, and: balance)
+        return balanceString
+    }
     
     func getInOutStatementsOfMoneyFor(account id: Int) -> (in: String, out: String) {
         

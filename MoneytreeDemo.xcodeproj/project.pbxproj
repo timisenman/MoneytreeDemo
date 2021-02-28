@@ -98,16 +98,13 @@
 		8D2D7AB825EAA33300CA06B8 /* MoneytreeDemo */ = {
 			isa = PBXGroup;
 			children = (
-				8D2D7AD625EAA4C000CA06B8 /* Model */,
-				8D2D7ABD25EAA33300CA06B8 /* ViewController.swift */,
-				8D2D7ABB25EAA33300CA06B8 /* SceneDelegate.swift */,
-				8D2D7AB925EAA33300CA06B8 /* AppDelegate.swift */,
 				8D2D7AC225EAA33400CA06B8 /* Assets.xcassets */,
 				8D2D7AC425EAA33400CA06B8 /* LaunchScreen.storyboard */,
 				8D2D7AC725EAA33400CA06B8 /* Info.plist */,
-				8DF0796F25EB637800BBA15E /* UIHelpers.swift */,
-				8DF0797225EB823C00BBA15E /* CustomTableViewController.swift */,
-				8DF0797525EB828500BBA15E /* CustomTableViewCell.swift */,
+				8DF0797825EBA83100BBA15E /* DelegateResources */,
+				8D2D7AD625EAA4C000CA06B8 /* Model */,
+				8DF0797925EBA84800BBA15E /* Controllers */,
+				8DF0797A25EBA85D00BBA15E /* View */,
 			);
 			path = MoneytreeDemo;
 			sourceTree = "<group>";
@@ -140,6 +137,33 @@
 				8D2D7ADA25EAA5D700CA06B8 /* transactions_3.json */,
 			);
 			path = TransactionData;
+			sourceTree = "<group>";
+		};
+		8DF0797825EBA83100BBA15E /* DelegateResources */ = {
+			isa = PBXGroup;
+			children = (
+				8D2D7ABB25EAA33300CA06B8 /* SceneDelegate.swift */,
+				8D2D7AB925EAA33300CA06B8 /* AppDelegate.swift */,
+			);
+			path = DelegateResources;
+			sourceTree = "<group>";
+		};
+		8DF0797925EBA84800BBA15E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8D2D7ABD25EAA33300CA06B8 /* ViewController.swift */,
+				8DF0797225EB823C00BBA15E /* CustomTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8DF0797A25EBA85D00BBA15E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8DF0797525EB828500BBA15E /* CustomTableViewCell.swift */,
+				8DF0796F25EB637800BBA15E /* UIHelpers.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

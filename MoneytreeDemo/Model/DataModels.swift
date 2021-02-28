@@ -8,8 +8,8 @@
 import Foundation
 
 struct UserAccounts: Codable {
-    let accounts: AllAccounts?
-    let transactionHistory: TransactionList?
+    let accountsList: AllAccounts?
+    let transactionsPerAccount: [TransactionsPerAccount]?
     
     //numberOfAccounts
     
@@ -43,7 +43,7 @@ struct Account: Codable {
     let currentBalanceInBase: Double?
 }
 
-struct TransactionList: Codable {
+struct TransactionsPerAccount: Codable {
     let transactions: [Transaction]?
 }
 
