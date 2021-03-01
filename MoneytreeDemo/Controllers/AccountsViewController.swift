@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class MainNavigationController: UINavigationController {
-    var viewController = ViewController()
+    var viewController = AccountsViewController()
     
     init() {
         super.init(rootViewController: viewController)
@@ -24,7 +24,7 @@ class MainNavigationController: UINavigationController {
     }
 }
 
-class ViewController: UIViewController {
+class AccountsViewController: UIViewController {
 
     private let accountData = FakeDataManager.shared
     

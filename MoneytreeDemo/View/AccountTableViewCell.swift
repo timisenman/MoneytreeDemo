@@ -7,35 +7,37 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
-
+class AccountTableViewCell: UITableViewCell {
+    
+    let hStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillProportionally
+        return stack
+    }()
     var cardName = UILabel()
     var amountLabel = UILabel()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         
-        self.contentView.snp.makeConstraints { (make) in
-            make.height.greaterThanOrEqualTo(44)
+        self.contentView.frame.size = CGSize(width: self.frame.width, height: 44)
+        
+        self.contentView.addSubview(hStack)
+        hStack.addArrangedSubviews(views: [cardName, amountLabel])
+        hStack.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(10)
         }
         
-        self.contentView.addSubview(cardName)
         cardName.textColor = .white
+        cardName.textAlignment = .left
         cardName.font = UIFont.preferredFont(forTextStyle: .headline)
-        cardName.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(10)
-            make.centerY.equalToSuperview()
-        }
         
-        self.contentView.addSubview(amountLabel)
         amountLabel.textColor = .white
+        amountLabel.textAlignment = .right
         amountLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        amountLabel.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalToSuperview()
-        }
+
     }
 
     required init?(coder: NSCoder) {

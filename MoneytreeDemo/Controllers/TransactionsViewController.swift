@@ -1,5 +1,5 @@
 //
-//  AccountTransactionsViewController.swift
+//  TransactionsViewController.swift
 //  MoneytreeDemo
 //
 //  Created by Tim Isenman on 2021/03/01.
@@ -24,6 +24,7 @@ class TransactionsNavigationController: UINavigationController {
 }
 
 class TransactionsViewController: UIViewController {
+    
     let dataManager = FakeDataManager.shared
     let currencyFormatter = CurrencyFormatter()
     
@@ -31,6 +32,9 @@ class TransactionsViewController: UIViewController {
     var transactions: [Transaction]?
     
     let topSummary = UIView()
+    let balanceLabel = UILabel()
+    
+    var transactionTableView = TransactionsTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,27 +44,20 @@ class TransactionsViewController: UIViewController {
         self.title = accountData?.institution ?? "Transactions"
         let barButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissSelf))
         self.navigationItem.rightBarButtonItems = [barButton]
+        
+        transactionTableView.transactions = self.transactions
+        self.view.addSubview(transactionTableView.tableView)
+        transactionTableView.tableView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(60)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let id = accountData?.id {
-            self.transactions = dataManager.getTransactionsByAccount(id: id)
-            
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            
-//            if let transactions = transactions {
-//                for t in transactions {
-//                    let dateFromString = dateFormatter.date(from: t.date ?? "")!
-//                    let components = Calendar.current.dateComponents([.year, .month, .day, .hour], from: dateFromString)
-//                    let date = Calendar.current.date(from: components)!
-//                    print(date)
-//                }
-//            }
-
-        }
         
     }
     
@@ -75,6 +72,7 @@ class TransactionsViewController: UIViewController {
         gradientLayer.frame = self.view.bounds
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         self.view.backgroundColor = UIColor(named: "LightOrange")
+        
     }
     
     @objc func dismissSelf() {
@@ -82,5 +80,5 @@ class TransactionsViewController: UIViewController {
             print("Closed Transactions View")
         }
     }
+    
 }
-

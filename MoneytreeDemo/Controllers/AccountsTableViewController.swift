@@ -19,7 +19,7 @@ class AccountsTableViewController: UITableViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(AccountTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: sectionId)
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
@@ -41,7 +41,7 @@ class AccountsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! AccountTableViewCell
         let currenyFormatter = CurrencyFormatter()
         
         if let accountsByInstitution = accountsByInstitution {
@@ -50,6 +50,7 @@ class AccountsTableViewController: UITableViewController {
             
             let accountForCell = accountsByInstitution[indexPath.section][indexPath.row]
             let accountBalance = currenyFormatter.formatterdCurrency(for: .JPY, amount: accountForCell.currentBalance ?? 0)
+            
             cell.amountLabel.text = accountBalance
             cell.cardName.text = accountForCell.nickname ?? "なし"
         }
@@ -65,17 +66,22 @@ class AccountsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Tapped")
-        
         guard let accountsByInstitution = accountsByInstitution else { return }
         
-        print(accountsByInstitution.count)
         guard !accountsByInstitution[indexPath.item].isEmpty else { fatalError() }
         let accountAtRow = accountsByInstitution[indexPath.section][indexPath.row]
         
         let transactionsNavController = TransactionsNavigationController()
         transactionsNavController.modalPresentationStyle = .automatic
         transactionsNavController.transactionsViewController.accountData = accountAtRow
+        transactionsNavController.transactionsViewController.transactionTableView.account = accountAtRow
+        
+        if let id = accountAtRow.id {
+            var transactionForTable = FakeDataManager.shared.getTransactionsByAccount(id: id)
+            transactionForTable.sort(by: { $0.date ?? "" > $1.date ?? "" })
+            transactionsNavController.transactionsViewController.transactions = transactionForTable
+            
+        }
         
         self.navigationController?.present(transactionsNavController, animated: true, completion: {
             print("Presented from Nav")
