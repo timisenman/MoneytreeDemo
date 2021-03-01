@@ -80,7 +80,7 @@ class AccountsViewController: UIViewController {
         let digitalMoneyContainer = UIView()
         let digitalMoneyLabel = UILabel()
         digitalMoneyLabel.text = "Digital Money"
-        digitalMoneyLabel.accessibilityLabel = "Digital Money"
+        digitalMoneyLabel.accessibilityLabel = "Your Account Balance"
         digitalMoneyLabel.textAlignment = .left
         digitalMoneyLabel.textColor = .white
         digitalMoneyLabel.adjustsFontForContentSizeCategory = true

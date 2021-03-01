@@ -52,6 +52,7 @@ class AccountsTableViewController: UITableViewController {
             let accountBalance = currenyFormatter.formatterdCurrency(for: .JPY, amount: accountForCell.currentBalance ?? 0)
             
             cell.amountLabel.text = accountBalance
+//            cell.amountLabel.acc
             cell.cardName.text = accountForCell.nickname ?? "なし"
         }
 
@@ -84,12 +85,10 @@ class AccountsTableViewController: UITableViewController {
         }
         
         self.navigationController?.present(transactionsNavController, animated: true, completion: {
-            print("Presented from Nav")
+            //
         })
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    
-
 }

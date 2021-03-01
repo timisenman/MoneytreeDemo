@@ -21,6 +21,7 @@ class TransactionsTableViewController: UITableViewController {
         self.tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: cellId)
         self.tableView.backgroundColor = .clear
         
+        self.accessibilityLabel = "List of Transactions for Selected Account"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,12 +42,17 @@ class TransactionsTableViewController: UITableViewController {
             
             let transaction = transactions[indexPath.row]
             cell.descriptionLabel.text = transaction.description
+            cell.descriptionLabel.accessibilityLabel = "Purchase Item: \(String(describing: transaction.description))"
             cell.dateLabel.text = transaction.date
+            cell.dateLabel.accessibilityLabel = "Purchase on: \(String(describing: transaction.date))"
             
             let currency = account?.currency ?? "JPY"
-            cell.amountLabel.text = currencyFormatter.formatterdCurrency(
+            let amount = currencyFormatter.formatterdCurrency(
                 for: currency == "JPY" ? .JPY : .USD,
                 amount: transaction.amount ?? 0)
+            cell.amountLabel.text = amount
+            cell.amountLabel.accessibilityLabel = "Amount paid: \(String(describing: amount))"
+            
             
         }
         
