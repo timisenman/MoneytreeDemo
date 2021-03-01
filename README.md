@@ -1,5 +1,4 @@
 # MoneytreeDemo
-A poor attempt at demonstrating development skills to Moneytree JP
 
 Hey Moneytree folks,
 
