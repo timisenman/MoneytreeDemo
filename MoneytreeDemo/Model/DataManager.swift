@@ -13,17 +13,60 @@ class FakeDataManager: NSObject {
     
     public var usersAccounts: UserAccounts?
     
+    public var accountsByInstitution: [[Account]]?
+    
     enum CurrencyCode: String { case JPY, USD }
     
     override init() {
         super.init()
-        getDataFromBundle()
+        
+        DispatchQueue.global(qos: .default).async {
+            self.getDataFromBundle {
+                self.sortByInstitutions()
+            }
+        }
     }
     
 }
 
 extension FakeDataManager {
-    func getDataFromBundle() {
+
+    func sortByInstitutions() {
+        guard let accountsList = usersAccounts?.accountsList?.accounts else { fatalError("No Accounts") }
+        
+        var uniqueInstitutions: [String] {
+            var accountNames  = [String]()
+            accountsList.forEach { (account) in
+                if let institution = account.institution {
+                    accountNames.append(institution)
+                }
+            }
+            let uniqueNames = Set(accountNames)
+            return Array(uniqueNames)
+        }
+        
+        let institutionsArray = uniqueInstitutions
+        var allAccountsArray = [[Account]]()
+        
+        print("institutes: \(institutionsArray.count)")
+        for institute in institutionsArray {
+            //            print(institute)
+            var instituteArray = [Account]()
+            for a in accountsList {
+                
+                if (a.institution ?? "") == institute {
+                    instituteArray.append(a)
+                    print(a.institution, institute)
+                }
+            }
+            print("Current inst. count: \(allAccountsArray.count)")
+            allAccountsArray.append(instituteArray)
+        }
+        guard allAccountsArray.count == uniqueInstitutions.count else { fatalError("Insitute Array Mismatch") }
+        self.accountsByInstitution = allAccountsArray
+    }
+    
+    func getDataFromBundle(completion: () -> Void) {
         let accountData = Bundle.main.decode(AllAccounts.self,
                                              from: "accounts.json",
                                              keyDecodingStrategy: .convertFromSnakeCase)
@@ -43,6 +86,7 @@ extension FakeDataManager {
         })
         
         usersAccounts = UserAccounts(accountsList: accountData, transactionsPerAccount: tempTransactionsPerAccount)
+        completion()
     }
     
     func getTotalBalance(with currency: String = "JPY") -> String {
@@ -52,12 +96,11 @@ extension FakeDataManager {
         
         usersAccounts?.accountsList?.accounts?.forEach { (account) in
             if let currentBalance = account.currentBalance {
-                print("\(account.institution ?? "No Name"): \(currentBalance)")
                 balance += currentBalance
             }
         }
         let currencyFormatter = CurrencyFormatter()
-        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, and: balance)
+        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, amount: balance)
         return balanceString
     }
     

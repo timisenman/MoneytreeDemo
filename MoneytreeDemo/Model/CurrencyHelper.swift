@@ -13,7 +13,7 @@ struct CurrencyFormatter {
         case JPY, USD
     }
     
-    func formatterdCurrency(for code: CurrencyCode, and amount: Double) -> String {
+    func formatterdCurrency(for code: CurrencyCode, amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = code.rawValue

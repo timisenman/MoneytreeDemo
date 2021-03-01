@@ -26,17 +26,17 @@ class MainNavigationController: UINavigationController {
 
 class ViewController: UIViewController {
 
-    let accountData = FakeDataManager()
+    private let accountData = FakeDataManager()
     
-    let contentView = UIView()
+    private let contentView = UIView()
     
-    let accountsBalanceContainer = UIView()
-    let digitalMoneyTitleLabel = UILabel()
-    let totalBalanceLable = UILabel()
+    private let accountsBalanceContainer = UIView()
+    private let digitalMoneyTitleLabel = UILabel()
+    private let totalBalanceLable = UILabel()
     
-    var accountsTableView = SimpleTableViewController()
+    private var accountsTableView = SimpleTableViewController()
     
-    let addDigitalMoneyButton = UIView() //will be a button
+    private let addDigitalMoneyButton = UIView() //will be a button
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +120,8 @@ class ViewController: UIViewController {
             make.everythingEqualToSuperView()
         }
         
+        //inject data dependency to tableview
+        accountsTableView.accountsByInstitution = accountData.accountsByInstitution
     }
     
     override func viewDidLayoutSubviews() {

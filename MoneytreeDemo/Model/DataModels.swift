@@ -11,22 +11,49 @@ struct UserAccounts: Codable {
     let accountsList: AllAccounts?
     let transactionsPerAccount: [TransactionsPerAccount]?
     
-    //numberOfAccounts
     
-    //numberOfTransactions
-    
-//    func transactionsForAccount(id: Int) -> [Transaction] {
-//        var tempTransactions: [Transaction] = [Transaction]()
-//        if let accounts = allAccounts?.accounts, let transactions = transactionHistory?.transactions {
-//            accounts.forEach { (account) in
-//                for transaction in transactions {
-//                    if account.id == transaction.accountId {
-//                        tempTransactions = transactions
-//                    }
-//                }
+//    //numberOfAccounts
+//    var uniqueInstitutions: [String] {
+//        guard let accounts = accountsList?.accounts else { fatalError("No Accounts") }
+//        var accountNames  = [String]()
+//        accounts.forEach { (account) in
+//            if let institution = account.institution {
+//                accountNames.append(institution)
 //            }
 //        }
-//        return tempTransactions
+//        let uniqueNames = Set(accountNames)
+//        return Array(uniqueNames)
+//    }
+//    
+//    var institutionsCount: Int {
+//        return uniqueInstitutions.count
+//    }
+//    
+//    var accountsForInstitutions: [[Account]] {
+//        
+//        let institutionsArray = Array(uniqueInstitutions)
+//        guard let accounts = accountsList?.accounts else { fatalError("No Accounts") }
+//        var allAccountsArray = [[Account]]()
+//        
+//        print("institutes: \(institutionsArray.count)")
+//        for institute in institutionsArray {
+////            print(institute)
+//            var instituteArray = [Account]()
+//            for a in accounts {
+//                
+//                if (a.institution ?? "") == institute {
+//                    instituteArray.append(a)
+//                    print(a.institution, institute)
+//                }
+//            }
+//            print("Current inst. count: \(allAccountsArray.count)")
+//            allAccountsArray.append(instituteArray)
+//        }
+//        
+//        return allAccountsArray
+//        
+////        print(allAccountsArray.count)
+//        
 //    }
 }
 
