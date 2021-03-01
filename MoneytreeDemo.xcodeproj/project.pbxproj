@@ -18,9 +18,11 @@
 		8D2D7ADC25EAA5D700CA06B8 /* transactions_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2D7AD925EAA5D700CA06B8 /* transactions_2.json */; };
 		8D2D7ADD25EAA5D700CA06B8 /* transactions_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2D7ADA25EAA5D700CA06B8 /* transactions_3.json */; };
 		8D2D7AE025EAA7A000CA06B8 /* accounts.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2D7ADF25EAA7A000CA06B8 /* accounts.json */; };
+		8D3E982725ECBD42001AA588 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E982625ECBD42001AA588 /* TransactionsViewController.swift */; };
+		8D3E982C25ECCF31001AA588 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E982B25ECCF31001AA588 /* SectionHeader.swift */; };
 		8DF0796625EAAE3900BBA15E /* CurrencyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF0796525EAAE3900BBA15E /* CurrencyHelper.swift */; };
 		8DF0797025EB637800BBA15E /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF0796F25EB637800BBA15E /* UIHelpers.swift */; };
-		8DF0797325EB823C00BBA15E /* CustomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF0797225EB823C00BBA15E /* CustomTableViewController.swift */; };
+		8DF0797325EB823C00BBA15E /* AccountsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF0797225EB823C00BBA15E /* AccountsTableViewController.swift */; };
 		8DF0797625EB828500BBA15E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF0797525EB828500BBA15E /* CustomTableViewCell.swift */; };
 		9DE49D08F1781921C2FD51AD /* Pods_MoneytreeDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8541D535F5AF2F3CD845134 /* Pods_MoneytreeDemo.framework */; };
 /* End PBXBuildFile section */
@@ -41,9 +43,11 @@
 		8D2D7AD925EAA5D700CA06B8 /* transactions_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = transactions_2.json; sourceTree = "<group>"; };
 		8D2D7ADA25EAA5D700CA06B8 /* transactions_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = transactions_3.json; sourceTree = "<group>"; };
 		8D2D7ADF25EAA7A000CA06B8 /* accounts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accounts.json; sourceTree = "<group>"; };
+		8D3E982625ECBD42001AA588 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
+		8D3E982B25ECCF31001AA588 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		8DF0796525EAAE3900BBA15E /* CurrencyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyHelper.swift; sourceTree = "<group>"; };
 		8DF0796F25EB637800BBA15E /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
-		8DF0797225EB823C00BBA15E /* CustomTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewController.swift; sourceTree = "<group>"; };
+		8DF0797225EB823C00BBA15E /* AccountsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTableViewController.swift; sourceTree = "<group>"; };
 		8DF0797525EB828500BBA15E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B8541D535F5AF2F3CD845134 /* Pods_MoneytreeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneytreeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -152,7 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				8D2D7ABD25EAA33300CA06B8 /* ViewController.swift */,
-				8DF0797225EB823C00BBA15E /* CustomTableViewController.swift */,
+				8DF0797225EB823C00BBA15E /* AccountsTableViewController.swift */,
+				8D3E982625ECBD42001AA588 /* TransactionsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				8DF0797525EB828500BBA15E /* CustomTableViewCell.swift */,
+				8D3E982B25ECCF31001AA588 /* SectionHeader.swift */,
 				8DF0796F25EB637800BBA15E /* UIHelpers.swift */,
 			);
 			path = View;
@@ -285,10 +291,12 @@
 			files = (
 				8DF0797625EB828500BBA15E /* CustomTableViewCell.swift in Sources */,
 				8DF0797025EB637800BBA15E /* UIHelpers.swift in Sources */,
+				8D3E982C25ECCF31001AA588 /* SectionHeader.swift in Sources */,
 				8D2D7AD325EAA4AF00CA06B8 /* DataModels.swift in Sources */,
 				8D2D7ABE25EAA33300CA06B8 /* ViewController.swift in Sources */,
 				8D2D7AD025EAA49C00CA06B8 /* DataManager.swift in Sources */,
-				8DF0797325EB823C00BBA15E /* CustomTableViewController.swift in Sources */,
+				8D3E982725ECBD42001AA588 /* TransactionsViewController.swift in Sources */,
+				8DF0797325EB823C00BBA15E /* AccountsTableViewController.swift in Sources */,
 				8D2D7ABA25EAA33300CA06B8 /* AppDelegate.swift in Sources */,
 				8DF0796625EAAE3900BBA15E /* CurrencyHelper.swift in Sources */,
 				8D2D7ABC25EAA33300CA06B8 /* SceneDelegate.swift in Sources */,

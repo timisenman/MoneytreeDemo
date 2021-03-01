@@ -15,6 +15,10 @@ class FakeDataManager: NSObject {
     
     public var accountsByInstitution: [[Account]]?
     
+    public var transactions: [Transaction]?
+    
+    public var accounts: [Account]?
+    
     enum CurrencyCode: String { case JPY, USD }
     
     override init() {
@@ -23,13 +27,37 @@ class FakeDataManager: NSObject {
         DispatchQueue.global(qos: .default).async {
             self.getDataFromBundle {
                 self.sortByInstitutions()
+                self.getAccounts()
             }
         }
     }
     
 }
 
+//Helper Methods
 extension FakeDataManager {
+    
+    func getTransactionsByAccount(id: Int) -> [Transaction] {
+        
+        if let transactionList = usersAccounts?.transactionsPerAccount {
+            for accountTransactions in transactionList {
+                if accountTransactions.transactions?.first?.accountId == id {
+                    if let transactions = accountTransactions.transactions {
+                        return transactions
+                    }
+                }
+            }
+        }
+        
+        return [Transaction]()
+    }
+    
+    func getAccounts() {
+        guard let accountsList = usersAccounts?.accountsList?.accounts else { fatalError("No Accounts") }
+        for account in accountsList {
+            self.accounts?.append(account)
+        }
+    }
 
     func sortByInstitutions() {
         guard let accountsList = usersAccounts?.accountsList?.accounts else { fatalError("No Accounts") }
@@ -48,7 +76,6 @@ extension FakeDataManager {
         let institutionsArray = uniqueInstitutions
         var allAccountsArray = [[Account]]()
         
-        print("institutes: \(institutionsArray.count)")
         for institute in institutionsArray {
             //            print(institute)
             var instituteArray = [Account]()
@@ -56,16 +83,39 @@ extension FakeDataManager {
                 
                 if (a.institution ?? "") == institute {
                     instituteArray.append(a)
-                    print(a.institution, institute)
                 }
             }
-            print("Current inst. count: \(allAccountsArray.count)")
+            
             allAccountsArray.append(instituteArray)
         }
         guard allAccountsArray.count == uniqueInstitutions.count else { fatalError("Insitute Array Mismatch") }
         self.accountsByInstitution = allAccountsArray
     }
     
+    
+    func getTotalBalance(with currency: String = "JPY") -> String {
+        guard (usersAccounts?.accountsList?.accounts?.isEmpty != nil) else { fatalError("No users in record") }
+        
+        var balance: Double = 0.0
+        
+        usersAccounts?.accountsList?.accounts?.forEach { (account) in
+            if let currentBalance = account.currentBalance {
+                balance += currentBalance
+            }
+        }
+        let currencyFormatter = CurrencyFormatter()
+        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, amount: balance)
+        return balanceString
+    }
+    
+    func getInOutStatementsOfMoneyFor(account id: Int) -> (in: String, out: String) {
+        
+        return ("0", "400")
+    }
+}
+
+//Decoding and organizing JSON
+extension FakeDataManager {
     func getDataFromBundle(completion: () -> Void) {
         let accountData = Bundle.main.decode(AllAccounts.self,
                                              from: "accounts.json",
@@ -87,26 +137,6 @@ extension FakeDataManager {
         
         usersAccounts = UserAccounts(accountsList: accountData, transactionsPerAccount: tempTransactionsPerAccount)
         completion()
-    }
-    
-    func getTotalBalance(with currency: String = "JPY") -> String {
-        guard (usersAccounts?.accountsList?.accounts?.isEmpty != nil) else { fatalError("No users in record") }
-        
-        var balance: Double = 0.0
-        
-        usersAccounts?.accountsList?.accounts?.forEach { (account) in
-            if let currentBalance = account.currentBalance {
-                balance += currentBalance
-            }
-        }
-        let currencyFormatter = CurrencyFormatter()
-        let balanceString = currencyFormatter.formatterdCurrency(for: currency == "JPY" ? .JPY : .USD, amount: balance)
-        return balanceString
-    }
-    
-    func getInOutStatementsOfMoneyFor(account id: Int) -> (in: String, out: String) {
-        
-        return ("0", "400")
     }
 }
 

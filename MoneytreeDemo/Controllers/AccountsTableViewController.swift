@@ -7,12 +7,12 @@
 
 import UIKit
 
-class SimpleTableViewController: UITableViewController {
+class AccountsTableViewController: UITableViewController {
     
     var accountsByInstitution: [[Account]]?
     
-    
     private let cellId = "cell"
+    private let sectionId = "section"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +20,9 @@ class SimpleTableViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: sectionId)
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
-        
-        print("Account Groups")
-        if let accountsByInstitution = accountsByInstitution {
-            accountsByInstitution.forEach { (accountGroup) in
-                print(accountGroup.count)
-            }
-            
-        }
         
     }
 
@@ -56,7 +49,6 @@ class SimpleTableViewController: UITableViewController {
             guard !accountsByInstitution[indexPath.item].isEmpty else { fatalError() }
             
             let accountForCell = accountsByInstitution[indexPath.section][indexPath.row]
-            print("Account for cell: \(accountForCell)")
             let accountBalance = currenyFormatter.formatterdCurrency(for: .JPY, amount: accountForCell.currentBalance ?? 0)
             cell.amountLabel.text = accountBalance
             cell.cardName.text = accountForCell.nickname ?? "なし"
@@ -66,22 +58,32 @@ class SimpleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: sectionId) as! SectionHeader
         guard let accounts = accountsByInstitution else { fatalError() }
-        let header = UIView()
-        let title = UILabel()
-        
-        header.backgroundColor = UIColor.black.withAlphaComponent(0.10)
-        header.addSubview(title)
-        title.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(10)
-            make.centerY.equalToSuperview()
-        }
-        title.text = accounts[section].first?.institution
-        title.textColor = .white
-        title.font = UIFont.preferredFont(forTextStyle: .callout)
-        
+        header.titleString = accounts[section].first?.institution
         return header
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Tapped")
+        
+        guard let accountsByInstitution = accountsByInstitution else { return }
+        
+        print(accountsByInstitution.count)
+        guard !accountsByInstitution[indexPath.item].isEmpty else { fatalError() }
+        let accountAtRow = accountsByInstitution[indexPath.section][indexPath.row]
+        
+        let transactionsNavController = TransactionsNavigationController()
+        transactionsNavController.modalPresentationStyle = .automatic
+        transactionsNavController.transactionsViewController.accountData = accountAtRow
+        
+        self.navigationController?.present(transactionsNavController, animated: true, completion: {
+            print("Presented from Nav")
+        })
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
+    
     
 
 }

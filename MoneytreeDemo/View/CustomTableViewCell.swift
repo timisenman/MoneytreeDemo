@@ -17,6 +17,10 @@ class CustomTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         
+        self.contentView.snp.makeConstraints { (make) in
+            make.height.greaterThanOrEqualTo(44)
+        }
+        
         self.contentView.addSubview(cardName)
         cardName.textColor = .white
         cardName.font = UIFont.preferredFont(forTextStyle: .headline)

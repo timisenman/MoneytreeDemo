@@ -26,7 +26,7 @@ class MainNavigationController: UINavigationController {
 
 class ViewController: UIViewController {
 
-    private let accountData = FakeDataManager()
+    private let accountData = FakeDataManager.shared
     
     private let contentView = UIView()
     
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     private let digitalMoneyTitleLabel = UILabel()
     private let totalBalanceLable = UILabel()
     
-    private var accountsTableView = SimpleTableViewController()
+    private var accountsTableView = AccountsTableViewController()
     
     private let addDigitalMoneyButton = UIView() //will be a button
     
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        
+        self.addChild(accountsTableView)
         tableViewContainer.addSubview(accountsTableView.tableView)
         accountsTableView.tableView.snp.makeConstraints { (make) in
             make.everythingEqualToSuperView()

@@ -3,4 +3,84 @@
    uuid = "981ECE4F-F327-408E-BFEE-07C83846BAF0"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "137FCA18-3628-4651-8C4B-F8848DEBC347"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoneytreeDemo/Model/DataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "FakeDataManager"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "137FCA18-3628-4651-8C4B-F8848DEBC347 - f2909ed578eff93d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneytreeDemo.FakeDataManager.transactions.getter : Swift.Optional&lt;Swift.Array&lt;MoneytreeDemo.Transaction&gt;&gt;"
+                  moduleName = "MoneytreeDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timisenman/Desktop/MoneyTree/MoneytreeDemo/MoneytreeDemo/Model/DataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "122">
+               </Location>
+               <Location
+                  uuid = "137FCA18-3628-4651-8C4B-F8848DEBC347 - d9a9361c9d6cd531"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneytreeDemo.FakeDataManager.transactions.setter : Swift.Optional&lt;Swift.Array&lt;MoneytreeDemo.Transaction&gt;&gt;"
+                  moduleName = "MoneytreeDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timisenman/Desktop/MoneyTree/MoneytreeDemo/MoneytreeDemo/Model/DataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "137FCA18-3628-4651-8C4B-F8848DEBC347 - 76b0b551ec6552e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneytreeDemo.FakeDataManager.transactions.modify : Swift.Optional&lt;Swift.Array&lt;MoneytreeDemo.Transaction&gt;&gt;"
+                  moduleName = "MoneytreeDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timisenman/Desktop/MoneyTree/MoneytreeDemo/MoneytreeDemo/Model/DataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "137FCA18-3628-4651-8C4B-F8848DEBC347 - b69a88af016871ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneytreeDemo.FakeDataManager.transactions.modify : Swift.Optional&lt;Swift.Array&lt;MoneytreeDemo.Transaction&gt;&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MoneytreeDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timisenman/Desktop/MoneyTree/MoneytreeDemo/MoneytreeDemo/Model/DataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
