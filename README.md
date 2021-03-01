@@ -9,6 +9,7 @@ For my submission, I completed user stories 1, and 2:
 Some things I didn't cover in the interest of time: 
 - I didn't build testing into the app. I was optimizing for time, so I reverted to bad habits and didn't do test-driven development. 
 - The app isn't fully accessible. I made sure to only use Dynamic Type to ensure some level of accessibility.
+- There are also build warnings due to my use of the SnapKit library for creating layouts. Again, this was a time optimization. At the very least, the console is generally nice and silent.
 
 I left these out in the interest of time and getting you something to evaluate me by sooner rather than later. 
 I hope it's obvious to my peers that better work would come if I weren't doing simultaneous pitches and interviews while completing this assignment 😅. 
